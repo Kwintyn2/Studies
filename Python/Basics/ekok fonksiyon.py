@@ -16,3 +16,5 @@ while True:
     else:
         a, b = int(a), int(b)
     print("EKOK: ",find_ekok(a,b))
+
+
