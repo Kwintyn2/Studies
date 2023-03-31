@@ -34,3 +34,5 @@ class ust_yonetici(yonetici):
 ust_yonetici1 = ust_yonetici("Adnan",39_000,"GENEL","CEO" , 35)
 
 ust_yonetici1.bilgilerigoster()
+
+

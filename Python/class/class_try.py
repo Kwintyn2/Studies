@@ -5,6 +5,7 @@ class araba():
     silindir = 4
 
 
+
 araba.model = "Test"
 print(araba.model)
 
