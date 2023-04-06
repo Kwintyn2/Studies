@@ -69,13 +69,18 @@ class Kütüphane():
             kitap = Kitap(kitaplar[0][0], kitaplar[0][1], kitaplar[0][2], kitaplar[0][3], kitaplar[0][4])
             print(kitap)
 
-    def kitap_ekle(self,kitap):
+    def kitap_ekle(self, kitap):
+        sorgu = "SELECT * FROM kitaplar where isim = ?"
+        self.cursor.execute(sorgu, (kitap.isim,))
+        sonuc = self.cursor.fetchall()
+        if len(sonuc) == 0:
+            sorgu2 = "INSERT INTO kitaplar Values(?, ?, ?, ?, ?)"
 
-        sorgu = "INSERT INTO kitaplar Values(?, ?, ?, ?, ?)"
+            self.cursor.execute(sorgu2, (kitap.isim, kitap.yazar, kitap.yayinevi, kitap.tur, kitap.baski))
 
-        self.cursor.execute(sorgu, (kitap.isim, kitap.yazar, kitap.yayinevi, kitap.tur, kitap.baski))
-
-        self.baglanti.commit()
+            self.baglanti.commit()
+        else:
+            print("Kitap Zaten Ekli")
 
     def kitap_sil(self,isim):
 
