@@ -23,9 +23,9 @@ def mail_mi(girdi):
     else:
         return False
 
-with open("mailler.txt", "r+", encoding="utf-8") as file:
+
+with open("mailler.txt", "r", encoding="utf-8") as file:
     mailler = file.readlines()
-    mail_sonuclari = dict()
     with open ("mail_sonuclari.txt", "w", encoding="utf-8") as file2:
         for mail in mailler:
             if mail_mi(mail):

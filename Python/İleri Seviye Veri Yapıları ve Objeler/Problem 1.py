@@ -17,7 +17,3 @@ for harf , sayi in dict1.items():
     print(f"'{harf}' harfi {sayi} defa geçiyor")
 
 
-
-
-
-
