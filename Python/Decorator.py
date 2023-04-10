@@ -1,3 +1,17 @@
+import time
+
+
+def time_count(func):
+    def wrapper(*args):
+        ftime = time.time()
+        func(*args)
+        stime = time.time()
+        print(str(stime - ftime))
+    return wrapper
+
+
+
+
 def mukemmel_sayi(func):
     def wrapper(*args):
         for x in args:
@@ -12,7 +26,9 @@ def mukemmel_sayi(func):
 
 
 @mukemmel_sayi
+@time_count
 def asal_sayi(*args):
+
     for x in args:
         sayi = 2
 
@@ -30,6 +46,7 @@ def asal_sayi(*args):
                 sayi += 1
             if sayi == x:
                print(x, "Asal")
+
 
 
 asal_sayi(*range(1, 10001))
