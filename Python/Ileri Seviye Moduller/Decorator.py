@@ -49,7 +49,6 @@ def asal_sayi(*args):
 
 
 
-asal_sayi(*range(1, 10001))
 
 
 
