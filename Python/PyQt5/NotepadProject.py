@@ -42,11 +42,19 @@ class Notepad(QWidget):
 
 
     def open_txt(self):
-        pass
+        folder_name = QFileDialog.getOpenFileName(self, "Open Folder", os.getenv("HOME"))
+
+        with open(folder_name[0], "r") as file:
+            self.text_area.setText(file.read())
+
 
 
     def save_txt(self):
-        pass
+        folder_name = QFileDialog.getSaveFileName(self, "Save txt", os.getenv("HOME"))
+
+        with open(folder_name[0], "w") as file:
+
+            file.write(self.text_area.toPlainText())
 
 
 
