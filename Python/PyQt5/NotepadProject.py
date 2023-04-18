@@ -35,8 +35,7 @@ class Notepad(QWidget):
         self.clear.clicked.connect(self.clear_text)
         self.open.clicked.connect(self.open_txt)
         self.save.clicked.connect(self.save_txt)
-        self.setWindowTitle("Cutie Notepad")
-        self.show()
+
     def clear_text(self):
         self.text_area.clear()
 
@@ -56,6 +55,69 @@ class Notepad(QWidget):
 
             file.write(self.text_area.toPlainText())
 
+class Menu(QMainWindow):
+
+    def __init__(self):
+        super().__init__()
+
+        self.window_main = Notepad()
+        self.setCentralWidget(self.window_main)
+
+        menu_bar = self.menuBar()
+
+        folder = menu_bar.addMenu("Folder")
+        edit = menu_bar.addMenu("Edit")
+
+        open_folder = QAction("Open Folder", self)
+        open_folder.setShortcut("Ctrl+O")
+
+        folder_save = QAction("Save Folder", self)
+        folder_save.setShortcut("Ctrl+S")
+
+        app_exit = QAction("Exit", self)
+        app_exit.setShortcut("Ctrl+Q")
+
+        folder.addAction(open_folder)
+        folder.addAction(folder_save)
+        folder.addAction(app_exit),
+
+        clear = QAction("Clear", self)
+        edit.addAction(clear)
+
+
+        search_and_change = edit.addMenu("Search And Change")
+        search = QAction("Search", self)
+        change = QAction("Change", self)
+
+        search_and_change.addAction(search)
+        search_and_change.addAction(change)
+
+        folder.triggered.connect(self.response)
+        edit.triggered.connect(self.response)
+
+        app_exit.triggered.connect(self.app_exit_def)
+        self.setWindowTitle("Cutie Notepad")
+
+        self.show()
+
+    def app_exit_def(self):
+        qApp.quit()
+
+    def response(self, action):
+        if action.text() == "Open Folder":
+            self.window_main.open_txt()
+            print("Clicked to 'Open Folder'")
+        elif action.text() == "Save Folder":
+            self.window_main.save_txt()
+            print("Clicked to 'Save Folder'")
+        elif action.text() == "Clear":
+            self.window_main.clear_text()
+            print("Clicked to 'Clear'")
+
+
+
+
+
 
 
 
@@ -66,6 +128,6 @@ class Notepad(QWidget):
 
 app = QApplication(sys.argv)
 
-notepad = Notepad()
+notepad = Menu()
 
 sys.exit(app.exec_())
